@@ -1,0 +1,51 @@
+@startuml
+
+title Chess Domain Model
+
+Chess *-- Turn
+Chess *-- "2" Player
+Chess *-- Board
+
+Turn --> "2" Player
+
+Player --> Board
+Player *-- Color
+Player *-- King
+Player *-- Queen
+Player *-- "2" Bishop
+Player *-- "2" Knight
+Player *-- "2" Rook
+Player *-- "8" Pawn
+Player ..> "*" Movement
+Player o-- Goal
+Color <|-- Black
+Color <|-- White
+
+Board o-- "32" Piece
+Board *-- "8x8" Square
+
+Square o-- "0..1" Piece
+
+Piece <|-- Pawn
+Piece <|-- Rook
+Piece <|-- Knight
+Piece <|-- Bishop
+Piece <|-- Queen
+Piece <|-- King
+Piece *-- Movement
+
+Goal ..> toOpponentSquare
+Goal ..> King
+
+Movement *-- Destination
+Movement *-- Direction
+Movement *-- Quantity
+Destination <|-- toFreeSquare
+Destination <|-- toOpponentSquare
+Direction <|-- Horizontal
+Direction <|-- Vertical
+Direction <|-- Diagonal
+Direction <|-- L
+Quantity <|-- One
+Quantity <|-- Many
+@enduml
